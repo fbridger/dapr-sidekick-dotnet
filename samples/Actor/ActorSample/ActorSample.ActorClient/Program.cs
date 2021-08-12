@@ -34,9 +34,14 @@ namespace ActorClient
             // Create an actor Id.
             var actorId = new ActorId("abc");
 
+            var options = new ActorProxyOptions()
+            {
+                HttpEndpoint = "http://127.0.0.1:3501"
+            };
+
             // Make strongly typed Actor calls with Remoting.
             // DemoActor is the type registered with Dapr runtime in the service.
-            var proxy = ActorProxy.Create<IDemoActor>(actorId, "DemoActor");
+            var proxy = ActorProxy.Create<IDemoActor>(actorId, "DemoActor", options);
 
             Console.WriteLine("Making call using actor proxy to save data.");
             await proxy.SaveData(data);
